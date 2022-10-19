@@ -1,0 +1,17 @@
+.map {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
