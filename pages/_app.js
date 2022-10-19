@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import { CharacterPositionContextProvider } from "../context/characterPositionContext";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <CharacterPositionContextProvider>
+      <Component {...pageProps} />
+    </CharacterPositionContextProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
