@@ -22,7 +22,6 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
     if(index%2 == 0){
       var imgIndex = characterImages.indexOf(imageURI)
       if(imgIndex+1 == characterImages.length) imgIndex = 0
-      console.log(imgIndex)
       setImageURI(characterImages[imgIndex+1])
     }
 
