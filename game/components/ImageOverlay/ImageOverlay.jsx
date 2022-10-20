@@ -9,7 +9,7 @@ const ImageOverlay = ({ leftImage, rightImage }) => {
       <div className={cn(styles.image, styles.left)}>
         <Image
           layout="fill"
-          objectFit="contain"
+          objectFit="cover"
           objectPosition="bottom right"
           src={leftImage}
           priority

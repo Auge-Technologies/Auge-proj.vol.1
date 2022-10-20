@@ -3,17 +3,25 @@ import React from "react";
 import { Button } from "../../components/Button/Button";
 import { Container } from "../../components/Container/Container";
 import { usePersistedState } from "../../hooks/usePersistedState";
+import { Input } from "../../components/Input/Input";
+import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
 
 const Name = () => {
   const [name, setName] = usePersistedState("name", "");
   const router = useRouter();
   return (
     <Container>
-      Legg inn navn
-      <input value={name} onChange={(e) => setName(e.target.value)} />
-      <Button onClick={() => router.push("/onboarding/known-skills")}>
-        Neste
-      </Button>
+      <ImageOverlay
+        leftImage="/onboarding/onboarding-2-left.png"
+        rightImage="/onboarding/onboarding-2-right.png"
+      />
+      <div style={{ textAlign: "center", marginTop: "20%" }}>
+        <h1>Hva er navnet ditt adventurer?</h1>
+        <Input value={name} onChange={(e) => setName(e.target.value)} />
+        <Button onClick={() => router.push("/onboarding/known-skills")}>
+          De kaller meg "{name ? name : "..."}"
+        </Button>
+      </div>
     </Container>
   );
 };
