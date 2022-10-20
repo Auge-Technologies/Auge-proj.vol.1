@@ -3,6 +3,7 @@ import client from "../../lib/client";
 import { useRouter } from "next/router";
 import styles from "./skilldialogue.module.scss"
 import { Button } from "../../components/Button/Button";
+import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
 
 const SkillDialogue = ({ dialogue, skillId, wizard }) => {
   const router = useRouter();
@@ -51,7 +52,10 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
   return (
     <>
     { !planPage && 
-    <div>
+      <div>
+
+        <ImageOverlay leftImage={'/treeandbush/bush.png'} rightImage={'/treeandbush/tree3.png'} />
+
         <div className={styles.wizard}>
           <img src={imageURI}></img>
         </div>
@@ -70,8 +74,8 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
             <Button onClick={() => router.push("/" + skillId)}>Ferdig</Button>
           </div>
         }
-        </div>
-      }
+      </div>
+    }
 
       { planPage &&
         <div className={styles.plan}>
