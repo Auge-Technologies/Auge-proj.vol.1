@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useRef } from "react";
 import { CharacterContext } from "../../context/characterPositionContext";
@@ -30,7 +31,7 @@ export const Character = ({ route }) => {
     }
     handleResize();
 
-    const speed = 8;
+    const speed = 4;
     let height, width;
 
     const startDirection =
@@ -90,13 +91,15 @@ export const Character = ({ route }) => {
           outOfBounds("left", pos.y);
         } else {
           deltaPos.x -= speed;
+          characterRef.current.style.transform = "scaleX(-1)";
         }
       }
       if (directions.includes("ArrowRight") || directions.includes("d")) {
-        if (pos.x > width) {
+        if (pos.x > width - 100) {
           outOfBounds("right", pos.y);
         } else {
           deltaPos.x += speed;
+          characterRef.current.style.transform = "scaleX(1)";
         }
       }
 
@@ -128,5 +131,10 @@ export const Character = ({ route }) => {
     return cleanup;
   }, []);
 
-  return <div ref={characterRef} className={style.character} />;
+  return (
+    <div ref={characterRef} className={style.character}>
+      <Image src="/character.png" width={109} height={139} />
+      <div className={style.shadow} />
+    </div>
+  );
 };

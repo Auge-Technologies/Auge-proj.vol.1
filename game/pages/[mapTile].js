@@ -76,7 +76,7 @@ const MapScreen = ({
       />
       {!knownSkills.includes(skillId) && (
         <>
-          <Wizard />
+          <Wizard type={wizard.characterType} />
           <OpenDialogueButton skillId={skillId} />
         </>
       )}
@@ -137,7 +137,8 @@ export async function getStaticProps(context) {
       },
       "isOrigin": count(*[_type == "path" && references(^._id)]) > 0,
       wizard->{
-        name
+        name,
+        characterType
       }
     }[0]
   `,

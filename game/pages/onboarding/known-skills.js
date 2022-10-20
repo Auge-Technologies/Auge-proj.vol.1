@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { ToggleButton } from "../../components/Button/ToggleButton";
 import { Container } from "../../components/Container/Container";
+import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
 import { KnownSkillsContext } from "../../context/KnownSkillsContext";
 import client from "../../lib/client";
 
@@ -24,27 +25,46 @@ const KnownSkills = ({ skills, paths }) => {
 
   return !loading ? (
     <Container>
-      {categories.map(({ name, skills, pathId }) =>
-        skills.length === 0 ? (
-          ""
-        ) : (
-          <div key={pathId}>
-            <h1>{name}</h1>
-            {skills.map(({ name, _id }) => (
-              <ToggleButton
-                text={name}
-                toggled={knownSkills.includes(_id)}
-                toggleOn={() => addSkill(_id)}
-                toggleOff={() => removeSkill(_id)}
-                key={_id}
-              />
-            ))}
-          </div>
-        )
-      )}
-      <Button onClick={() => router.push("/onboarding/youre-a-wizard")}>
-        Fullfør
-      </Button>
+      <ImageOverlay
+        leftImage="/onboarding/onboarding-3-left.png"
+        rightImage="/onboarding/onboarding-3-right.png"
+      />
+      <div style={{ padding: "0 20%" }}>
+        <h1>Hva kan du?</h1>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry.
+        </p>
+        {categories.map(({ name, skills, pathId }) =>
+          skills.length === 0 ? (
+            ""
+          ) : (
+            <div key={pathId}>
+              <br />
+              <br />
+              <h2>{name}</h2>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                {skills.map(({ name, _id }) => (
+                  <ToggleButton
+                    text={name}
+                    toggled={knownSkills.includes(_id)}
+                    toggleOn={() => addSkill(_id)}
+                    toggleOff={() => removeSkill(_id)}
+                    key={_id}
+                  />
+                ))}
+              </div>
+            </div>
+          )
+        )}
+        <br />
+        <br />
+        <br />
+        <br />
+        <Button onClick={() => router.push("/onboarding/youre-a-wizard")}>
+          Fullfør
+        </Button>
+      </div>
     </Container>
   ) : (
     ""
