@@ -2,7 +2,6 @@ import Image from "next/image";
 import { cn } from "../../lib/helpers";
 import { Character } from "../character/Character";
 import styles from "./Map.module.scss";
-import { OpenDialogueButton } from "./OpenDialogue";
 
 export const Map = ({
   name,
@@ -15,11 +14,10 @@ export const Map = ({
     <div className={styles.mapWrapper}>
       <Character route={route} />
       <p className={styles.name}>{name}</p>
-      <OpenDialogueButton skillId={skillId} />
       <div className={cn(styles.map, styles.left)}>
         <Image
           src={`/mapTiles/left-${inputConnectionCount}-foreground.png`}
-          alt="Left side of map foreground"
+          alt={`left-${inputConnectionCount}-foreground`}
           layout="fill"
           objectFit="cover"
           objectPosition={"right"}
@@ -27,7 +25,7 @@ export const Map = ({
         />{" "}
         <Image
           src={`/mapTiles/left-${inputConnectionCount}-background.png`}
-          alt="Left side of map background"
+          alt={`left-${inputConnectionCount}-background`}
           layout="fill"
           objectFit="cover"
           objectPosition={"right"}
@@ -37,7 +35,7 @@ export const Map = ({
       <div className={cn(styles.map, styles.right)}>
         <Image
           src={`/mapTiles/right-${outputConnectionCount}-foreground.png  `}
-          alt="Right side of map foreground"
+          alt={`right-${inputConnectionCount}-foreground`}
           layout="fill"
           objectFit="cover"
           objectPosition={"left"}
@@ -45,7 +43,7 @@ export const Map = ({
         />
         <Image
           src={`/mapTiles/right-${outputConnectionCount}-background.png  `}
-          alt="Right side of map background"
+          alt={`right-${inputConnectionCount}-background`}
           layout="fill"
           objectFit="cover"
           objectPosition={"left"}

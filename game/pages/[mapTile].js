@@ -1,13 +1,13 @@
 import { Map } from "../features/map/Map";
 import { MapMarker } from "../features/map/MapMarker";
 import client from "../lib/client";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { Character } from "../features/character/Character";
-import { Button } from "../components/Button/Button";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CharacterContext } from "../context/characterPositionContext";
 import useWindowDimensions from "../hooks/useWindowDimensions";
+import { Wizard } from "../features/map/Wizard";
+import { KnownSkillsContext } from "../context/KnownSkillsContext";
+import { OpenDialogueButton } from "../features/map/OpenDialogue";
 
 const MapScreen = ({
   name,
@@ -16,10 +16,12 @@ const MapScreen = ({
   wizard,
   skillId,
 }) => {
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const goToDialogue = () => {
     router.push(`/skill-dialogue/${skillId}`);
   };
+  const { knownSkills } = useContext(KnownSkillsContext);
   const { width, height } = useWindowDimensions();
   const { pos } = useContext(CharacterContext);
 
@@ -33,6 +35,10 @@ const MapScreen = ({
     const index = distances.indexOf(Math.min(...distances));
     return index;
   };
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const route = (type, y) => {
     switch (type) {
@@ -59,20 +65,24 @@ const MapScreen = ({
     }
   };
 
-  return (
+  return loading ? null : (
     <>
       <Map
         name={name}
-        inputConnectionCount={inputConnections?.length}
+        inputConnectionCount={inputConnections?.length || 0}
         outputConnectionCount={outputConnections.length}
         route={route}
         skillId={skillId}
       />
+      {!knownSkills.includes(skillId) && (
+        <>
+          <Wizard />
+          <OpenDialogueButton skillId={skillId} />
+        </>
+      )}
       <ul style={{ position: "absolute", left: 0 }}>
         {inputConnections?.map(({ name, _id }) => (
-          <li key={_id}>
-            <Link href={_id}>{name}</Link>
-          </li>
+          <MapMarker label={name} top={height * 0.3} left />
         ))}
       </ul>
       <ul style={{ position: "absolute", right: 0 }}>
@@ -91,14 +101,6 @@ const MapScreen = ({
           );
         })}
       </ul>
-      {skillId && (
-        <Button
-          onClick={goToDialogue}
-          style={{ position: "absolute", bottom: "3rem", left: "50%" }}
-        >
-          Åpne dialogen {pos.x} {pos.y}
-        </Button>
-      )}
     </>
   );
 };

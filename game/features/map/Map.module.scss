@@ -64,6 +64,10 @@
     position: absolute;
     border-radius: 4px;
   }
+  &.left {
+    right: auto;
+    left: 2rem;
+  }
 }
 
 .openDialogueButton {
@@ -72,4 +76,12 @@
   left: 50%;
   transform: translate(60px, -40px);
   z-index: 2;
+}
+
+.wizard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(120px, -100px);
+  background: red;
 }

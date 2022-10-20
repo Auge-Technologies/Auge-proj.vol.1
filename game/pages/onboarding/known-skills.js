@@ -1,11 +1,16 @@
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import { Button } from "../../components/Button/Button";
 import { ToggleButton } from "../../components/Button/ToggleButton";
+import { Container } from "../../components/Container/Container";
 import { KnownSkillsContext } from "../../context/KnownSkillsContext";
 import client from "../../lib/client";
 
 const KnownSkills = ({ skills, paths }) => {
   const { knownSkills, addSkill, removeSkill } = useContext(KnownSkillsContext);
   const [loading, setLoading] = useState(true);
+
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(false);
@@ -18,7 +23,7 @@ const KnownSkills = ({ skills, paths }) => {
   }));
 
   return !loading ? (
-    <div>
+    <Container>
       {categories.map(({ name, skills, pathId }) =>
         skills.length === 0 ? (
           ""
@@ -37,7 +42,10 @@ const KnownSkills = ({ skills, paths }) => {
           </div>
         )
       )}
-    </div>
+      <Button onClick={() => router.push("/onboarding/youre-a-wizard")}>
+        Fullfør
+      </Button>
+    </Container>
   ) : (
     ""
   );
