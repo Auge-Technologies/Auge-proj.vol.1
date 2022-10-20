@@ -2,6 +2,10 @@ import { Map } from "../features/map/Map";
 import client from "../lib/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Character } from "../features/character/Character";
+import { Button } from "../components/Button/Button";
+import { useContext } from "react";
+import { CharacterContext } from "../context/characterPositionContext";
 
 const MapScreen = ({
   name,
@@ -14,12 +18,40 @@ const MapScreen = ({
   const goToDialogue = () => {
     router.push(`/skill-dialogue/${skillId}`);
   };
+  const { pos } = useContext(CharacterContext);
+
+  const route = (type) => {
+    switch (type) {
+      case "left":
+        if (inputConnections?.length > 0)
+          router.push({
+            pathname: inputConnections[0]._id,
+            query: { startDirection: "right" },
+          });
+
+        break;
+      case "right":
+        if (outputConnections?.length > 0)
+          router.push({
+            pathname: outputConnections[0]._id,
+            query: { startDirection: "left" },
+          });
+        break;
+      case "dialogue":
+        console.log("dialogue");
+        break;
+      default:
+        return;
+    }
+  };
+
   return (
-    <div>
-      <h1 style={{ width: "100%", textAlign: "center" }}>{name}</h1>
+    <>
+      {/* <h1 style={{ width: "100%", textAlign: "center" }}>{name}</h1> */}
       <Map
         inputConnectionCount={inputConnections?.length}
         outputConnectionCount={outputConnections.length}
+        route={route}
       />
       <ul style={{ position: "absolute", left: 0 }}>
         {inputConnections?.map(({ name, _id }) => (
@@ -36,14 +68,14 @@ const MapScreen = ({
         ))}
       </ul>
       {skillId && (
-        <button
+        <Button
           onClick={goToDialogue}
           style={{ position: "absolute", bottom: "3rem", left: "50%" }}
         >
-          Åpne dialogen
-        </button>
+          Åpne dialogen {pos.x} {pos.y}
+        </Button>
       )}
-    </div>
+    </>
   );
 };
 

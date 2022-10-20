@@ -1,3 +1,14 @@
+.mapWrapper {
+  background-color: var(--primary-light);
+  width: calc(100vw - 2rem);
+  height: calc(100vh - 2rem);
+  top: 1rem;
+  left: 1rem;
+  border-radius: 4px;
+  position: absolute;
+  overflow: hidden;
+  z-index: -1;
+}
 .map {
   position: absolute;
   top: 0;
@@ -5,7 +16,6 @@
   height: 100%;
   pointer-events: none;
   user-select: none;
-  z-index: -1;
 }
 
 .left {

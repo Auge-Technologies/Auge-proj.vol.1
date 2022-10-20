@@ -1,9 +1,12 @@
+import { useRouter } from "next/router";
 import { useContext, useEffect, useRef } from "react";
 import { CharacterContext } from "../../context/characterPositionContext";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 import style from "./Character.module.scss";
 
-export const Character = () => {
+export const Character = ({ route }) => {
   const { pos, updatePos } = useContext(CharacterContext);
+  const { height, width } = useWindowDimensions();
 
   let animationRef = null;
   const characterRef = useRef(null);
@@ -15,13 +18,29 @@ export const Character = () => {
     updatePos(newPos);
   };
 
-  useEffect(() => {
-    // setInterval(setPosition, 100);
-  });
+  const outOfBounds = (direction) => {
+    route(direction);
+  };
 
   useEffect(() => {
-    const pos = { x: 0, y: 0 };
+    function handleResize() {
+      if (typeof window === "undefined") return { width: null, height: null };
+      const { innerWidth, innerHeight } = window;
+      width = innerWidth;
+      height = innerHeight;
+    }
+    handleResize();
+
     const speed = 3;
+    let height, width;
+
+    const startDirection =
+      new URLSearchParams(window.location.search).get("startDirection") ||
+      "left";
+
+    console.log(width);
+    const pos = { x: startDirection === "left" ? 50 : width - 50, y: 400 };
+
     const allowedKeys = [
       "ArrowUp",
       "ArrowDown",
@@ -53,14 +72,32 @@ export const Character = () => {
 
     const moveCharacter = () => {
       const deltaPos = { x: 0, y: 0 };
-      if (directions.includes("ArrowUp") || directions.includes("w"))
+      if (
+        (directions.includes("ArrowUp") || directions.includes("w")) &&
+        pos.y > 0
+      ) {
         deltaPos.y -= speed;
-      if (directions.includes("ArrowDown") || directions.includes("s"))
+      }
+      if (
+        (directions.includes("ArrowDown") || directions.includes("s")) &&
+        pos.y < height
+      ) {
         deltaPos.y += speed;
-      if (directions.includes("ArrowLeft") || directions.includes("a"))
-        deltaPos.x -= speed;
-      if (directions.includes("ArrowRight") || directions.includes("d"))
-        deltaPos.x += speed;
+      }
+      if (directions.includes("ArrowLeft") || directions.includes("a")) {
+        if (pos.x < 0) {
+          outOfBounds("left");
+        } else {
+          deltaPos.x -= speed;
+        }
+      }
+      if (directions.includes("ArrowRight") || directions.includes("d")) {
+        if (pos.x > width) {
+          outOfBounds("right");
+        } else {
+          deltaPos.x += speed;
+        }
+      }
 
       pos.x += deltaPos.x;
       pos.y += deltaPos.y;
@@ -75,6 +112,7 @@ export const Character = () => {
     const setup = () => {
       window.addEventListener("keydown", handleKeydown);
       window.addEventListener("keyup", handleKeyup);
+      window.addEventListener("resize", handleResize);
       animationRef = window.requestAnimationFrame(moveCharacter);
     };
 
@@ -82,6 +120,7 @@ export const Character = () => {
       window.cancelAnimationFrame(animationRef);
       window.removeEventListener("keydown", handleKeydown);
       window.removeEventListener("keyup", handleKeyup);
+      window.removeEventListener("resize", handleResize);
     };
 
     setup();
