@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import styles from "./skilldialogue.module.scss"
 import { Button } from "../../components/Button/Button";
 import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
+import { Container } from "../../components/Container/Container";
 
 const SkillDialogue = ({ dialogue, skillId, wizard }) => {
   const router = useRouter();
@@ -50,7 +51,8 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
   }
 
   return (
-    <>
+    <Container>
+      <>
     { !planPage && 
       <div>
 
@@ -79,6 +81,7 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
 
       { planPage &&
         <div className={styles.plan}>
+           <ImageOverlay leftImage={'/treeandbush/bush.png'} rightImage={'/treeandbush/tree3.png'} />
           <div className={styles.graphics}>
             <img src="/pen-n-paipa.png"></img>
             <h1 className={styles.name}>some name</h1>
@@ -94,7 +97,8 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
           </div>
         </div>
       }
-    </>
+      </>
+    </Container>
   );
 };
 
