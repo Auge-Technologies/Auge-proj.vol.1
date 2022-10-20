@@ -21,6 +21,12 @@ export default {
       to: { type: "path" },
     },
     {
+      name: "dialogue",
+      title: "dialogue",
+      type: "array",
+      of: [{ type: "text" }],
+    },
+    {
       name: "wizard",
       title: "wizard",
       type: "reference",

@@ -1,8 +1,19 @@
 import { Map } from "../features/map/Map";
 import client from "../lib/client";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-const MapScreen = ({ name, inputConnections, outputConnections, wizard }) => {
+const MapScreen = ({
+  name,
+  inputConnections,
+  outputConnections,
+  wizard,
+  skillId,
+}) => {
+  const router = useRouter();
+  const goToDialogue = () => {
+    router.push(`/skill-dialogue/${skillId}`);
+  };
   return (
     <div>
       <h1 style={{ width: "100%", textAlign: "center" }}>{name}</h1>
@@ -24,6 +35,14 @@ const MapScreen = ({ name, inputConnections, outputConnections, wizard }) => {
           </li>
         ))}
       </ul>
+      {skillId && (
+        <button
+          onClick={goToDialogue}
+          style={{ position: "absolute", bottom: "3rem", left: "50%" }}
+        >
+          Åpne dialogen
+        </button>
+      )}
     </div>
   );
 };
@@ -66,9 +85,9 @@ export async function getStaticProps(context) {
   `,
       { skillId: mapTile }
     )) || {};
-  console.log(result);
+
   return {
-    props: result,
+    props: { ...result, skillId: mapTile },
   };
 }
 export default MapScreen;
