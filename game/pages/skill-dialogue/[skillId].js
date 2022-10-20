@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import client from "../../lib/client";
 import { useRouter } from "next/router";
 import styles from "./skilldialogue.module.scss"
+import { Button } from "../../components/Button/Button";
 
 const SkillDialogue = ({ dialogue, skillId, wizard }) => {
   const router = useRouter();
   const [dialogueText, setDialogueText] = useState(dialogue[0])
+  const [textDisplay, setTextDisplay] = useState(true)
+  const [planPage, setPlanPage] = useState(false)
   
   const characterImages = [
     '/characters/'+wizard.characterType+'/'+wizard.characterType+'1.png',
@@ -17,9 +20,14 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
 
   const nextDialogue = () => {
     var index  = dialogue.indexOf(dialogueText)
-    if(index === -1) index = 0
-    setDialogueText(dialogue[index+1])
-    if(index%2 == 0){
+    index += 1
+    if(index === dialogue.length){
+      setTextDisplay(false)
+      setImageURI(characterImages[0])
+    }
+    console.log(index, dialogue[index])
+    setDialogueText(dialogue[index])
+    if(index%2 !== 0){
       var imgIndex = characterImages.indexOf(imageURI)
       if(imgIndex+1 == characterImages.length) imgIndex = 0
       setImageURI(characterImages[imgIndex+1])
@@ -29,22 +37,60 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
     
   };
 
+  const readAgain = () => {
+    setTextDisplay(true)
+    setDialogueText(dialogue[0])
+    setImageURI(characterImages[1])
+  }
+
+  const displayPlanPage = () =>{
+    console.log('bs');
+    setPlanPage(true)
+  }
+
   return (
+    <>
+    { !planPage && 
     <div>
-      <button onClick={() => router.push("/" + skillId)}>Ferdig</button>
-      <div className={styles.wizard}>
-        <img src={imageURI}></img>
-      </div>
-      <div className={styles.textbubble}>
-        <h2 className={styles.dialogue}>{dialogueText}</h2>
-        <button onClick={nextDialogue}>Next</button>
-      </div>
-      <div className={styles.questions}>
-        <button>one</button>
-        <button>another</button>
-        <button>another again</button>
-      </div>
-    </div>
+        <div className={styles.wizard}>
+          <img src={imageURI}></img>
+        </div>
+
+        { textDisplay &&
+          <div className={styles.textbubble}>
+            <h2 className={styles.dialogue}>{dialogueText}</h2>
+            <button onClick={nextDialogue}>Next</button>
+          </div>
+        }
+        
+        {!textDisplay && 
+          <div className={styles.questions}>
+            <Button onClick={readAgain} >på nytt</Button>
+            <Button onClick={displayPlanPage}>gi meg en plan!</Button>
+            <Button onClick={() => router.push("/" + skillId)}>Ferdig</Button>
+          </div>
+        }
+        </div>
+      }
+
+      { planPage &&
+        <div className={styles.plan}>
+          <div className={styles.graphics}>
+            <img src="/pen-n-paipa.png"></img>
+            <h1 className={styles.name}>some name</h1>
+            <ul className={styles.list}>
+              <li>greie 1</li>
+              <li>greie 2</li>
+              <li>greie 3</li>
+              <li> greie 4</li>
+            </ul>
+          </div>
+          <div className={styles.questions}>
+            <Button onClick={() => router.push("/" + skillId)}>Yes tanx</Button>
+          </div>
+        </div>
+      }
+    </>
   );
 };
 

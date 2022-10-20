@@ -7,27 +7,29 @@
     left: 700px;
 }
 .wizard > img {
-    height: 320px;
+    height: 400px;
 }
 .textbubble{
     height: 150px;
     width: 300px;
     background-color: grey;
     position: absolute;
-    left: 450px;
-    top: 40px;
+    left: 460px;
+    top: 50px;
     border-radius: 20px 20px 0px 20px;
 }
 .questions{
-    height: 200px;
+    height: 100px;
     width: 100%;
     background-color: grey;
     position: fixed;
     bottom: 0;
+    display: flex;
+    flex-direction: row;
 }
 
 .questions > button{
-    margin: 110px;
+    margin: auto;
 }
 
 .textbubble > button{
@@ -38,4 +40,34 @@
 
 .dialogue{
     text-align: center;
+}
+
+.plan{
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+.graphics{
+    height: 500px;
+    margin: auto;
+    margin-left: 20%;
+    margin-top: 50px;
+}
+
+
+.name{
+    rotate: -53deg;
+    position: fixed;
+    top: 200px;
+    left: 400px;
+}
+
+.list{
+    line-height: 4rem;
+    font-size: 1.8rem;
+    rotate: -56deg;
+    position: fixed;
+    top: 210px;
+    left: 560px;
 }
