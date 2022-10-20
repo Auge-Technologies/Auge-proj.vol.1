@@ -8,5 +8,13 @@ export default {
       title: "name",
       type: "string",
     },
+  {
+    name: "characterType",
+    title: "character type",
+    type: "string",
+    options: {
+      list: ["hunter", "wizard", "warrior", "druid"]
+    }
+  }
   ],
 };
