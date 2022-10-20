@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ToggleButton } from "../../components/ToggleButton";
+import { ToggleButton } from "../../components/Button/ToggleButton";
 import { KnownSkillsContext } from "../../context/KnownSkillsContext";
 import client from "../../lib/client";
 
