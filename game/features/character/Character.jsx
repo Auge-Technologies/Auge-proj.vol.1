@@ -6,20 +6,19 @@ import style from "./Character.module.scss";
 
 export const Character = ({ route }) => {
   const { pos, updatePos } = useContext(CharacterContext);
-  const { height, width } = useWindowDimensions();
 
   let animationRef = null;
   const characterRef = useRef(null);
 
   const setPosition = () => {
     const newPos = { x: 0, y: 0 };
-    newPos.y = characterRef.current.style.top;
-    newPos.x = characterRef.current.style.left;
+    newPos.y = parseInt(characterRef.current.style.top.split("px")[0]);
+    newPos.x = parseInt(characterRef.current.style.left.split("px")[0]);
     updatePos(newPos);
   };
 
-  const outOfBounds = (direction) => {
-    route(direction);
+  const outOfBounds = (direction, y) => {
+    route(direction, y);
   };
 
   useEffect(() => {
@@ -31,15 +30,17 @@ export const Character = ({ route }) => {
     }
     handleResize();
 
-    const speed = 3;
+    const speed = 8;
     let height, width;
 
     const startDirection =
       new URLSearchParams(window.location.search).get("startDirection") ||
       "left";
 
-    console.log(width);
-    const pos = { x: startDirection === "left" ? 50 : width - 50, y: 400 };
+    const pos = {
+      x: startDirection === "left" ? 50 : width - 200,
+      y: height / 2,
+    };
 
     const allowedKeys = [
       "ArrowUp",
@@ -86,14 +87,14 @@ export const Character = ({ route }) => {
       }
       if (directions.includes("ArrowLeft") || directions.includes("a")) {
         if (pos.x < 0) {
-          outOfBounds("left");
+          outOfBounds("left", pos.y);
         } else {
           deltaPos.x -= speed;
         }
       }
       if (directions.includes("ArrowRight") || directions.includes("d")) {
         if (pos.x > width) {
-          outOfBounds("right");
+          outOfBounds("right", pos.y);
         } else {
           deltaPos.x += speed;
         }

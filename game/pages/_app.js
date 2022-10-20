@@ -32,7 +32,11 @@ function MyApp({ Component, pageProps, router }) {
               exit="exit"
               variants={variants}
               transition={{ type: "linear" }}
-              style={{ height: "100vh", position: "relative" }}
+              style={{
+                height: "100vh",
+                overflow: "hidden",
+                position: "relative",
+              }}
             >
               <Component {...pageProps} />
             </motion.main>
