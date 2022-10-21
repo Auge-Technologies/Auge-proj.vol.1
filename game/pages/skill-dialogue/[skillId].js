@@ -5,6 +5,7 @@ import styles from "./skilldialogue.module.scss";
 import { Button } from "../../components/Button/Button";
 import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
 import { Container } from "../../components/Container/Container";
+import { usePersistedState } from "../../hooks/usePersistedState";
 
 const SkillDialogue = ({ dialogue, skillId, wizard }) => {
   if (!dialogue) {
@@ -14,6 +15,7 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
   const [dialogueText, setDialogueText] = useState(dialogue[0]);
   const [textDisplay, setTextDisplay] = useState(true);
   const [planPage, setPlanPage] = useState(false);
+  const [name] = usePersistedState("name", "");
 
   const characterImages = [
     "/characters/" +
