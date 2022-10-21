@@ -3,7 +3,7 @@ import { MapMarker } from "../features/map/MapMarker";
 import client from "../lib/client";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { CharacterContext } from "../context/characterPositionContext";
+import { CharacterContext } from "../context/CharacterPositionContext";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import { Wizard } from "../features/map/Wizard";
 import { KnownSkillsContext } from "../context/KnownSkillsContext";

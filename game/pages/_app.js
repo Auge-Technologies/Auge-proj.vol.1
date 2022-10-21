@@ -1,4 +1,4 @@
-import { CharacterPositionContextProvider } from "../context/characterPositionContext";
+import { CharacterPositionContextProvider } from "../context/CharacterPositionContext";
 import { KnownSkillsContextProvider } from "../context/KnownSkillsContext";
 import {
   AnimatePresence,

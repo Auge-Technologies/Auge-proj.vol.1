@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect } from "react";
 import { Button } from "../../components/Button/Button";
-import { CharacterContext } from "../../context/characterPositionContext";
+import { CharacterContext } from "../../context/CharacterPositionContext";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import styles from "./Map.module.scss";
 
