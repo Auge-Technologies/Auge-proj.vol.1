@@ -5,12 +5,14 @@ import styles from "./skilldialogue.module.scss"
 import { Button } from "../../components/Button/Button";
 import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
 import { Container } from "../../components/Container/Container";
+import { usePersistedState } from "../../hooks/usePersistedState";
 
 const SkillDialogue = ({ dialogue, skillId, wizard }) => {
   const router = useRouter();
   const [dialogueText, setDialogueText] = useState(dialogue[0])
   const [textDisplay, setTextDisplay] = useState(true)
   const [planPage, setPlanPage] = useState(false)
+  const [name] = usePersistedState("name", "")
   
   const characterImages = [
     '/characters/'+wizard.characterType+'/'+wizard.characterType+'1.png',
@@ -84,13 +86,13 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
            <ImageOverlay leftImage={'/treeandbush/bush.png'} rightImage={'/treeandbush/tree3.png'} />
           <div className={styles.graphics}>
             <img src="/pen-n-paipa.png"></img>
-            <h1 className={styles.name}>some name</h1>
-            <ul className={styles.list}>
-              <li>greie 1</li>
-              <li>greie 2</li>
-              <li>greie 3</li>
-              <li> greie 4</li>
-            </ul>
+            <h1 className={styles.name}>Til {name}</h1>
+            <ol className={styles.list}>
+              <li>...</li>
+              <li>...</li>
+              <li>...</li>
+              <li>...</li>
+            </ol>
           </div>
           <div className={styles.questions}>
             <Button onClick={() => router.push("/" + skillId)}>Yes tanx</Button>
