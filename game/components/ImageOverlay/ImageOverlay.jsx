@@ -13,6 +13,7 @@ const ImageOverlay = ({ leftImage, rightImage }) => {
           objectPosition="bottom right"
           src={leftImage}
           priority
+          alt=""
         />
       </div>
       <div className={cn(styles.image, styles.right)}>
@@ -22,6 +23,7 @@ const ImageOverlay = ({ leftImage, rightImage }) => {
           objectPosition="bottom right"
           src={rightImage}
           priority
+          alt=""
         />
       </div>
     </div>

@@ -1,102 +1,128 @@
 import React, { useState } from "react";
 import client from "../../lib/client";
 import { useRouter } from "next/router";
-import styles from "./skilldialogue.module.scss"
+import styles from "./skilldialogue.module.scss";
 import { Button } from "../../components/Button/Button";
 import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
 import { Container } from "../../components/Container/Container";
 
 const SkillDialogue = ({ dialogue, skillId, wizard }) => {
+  if (!dialogue) {
+    return <Container>Missing dialogue...</Container>;
+  }
   const router = useRouter();
-  const [dialogueText, setDialogueText] = useState(dialogue[0])
-  const [textDisplay, setTextDisplay] = useState(true)
-  const [planPage, setPlanPage] = useState(false)
-  
-  const characterImages = [
-    '/characters/'+wizard.characterType+'/'+wizard.characterType+'1.png',
-    '/characters/'+ wizard.characterType+'/'+wizard.characterType+'2.png',
-    '/characters/'+ wizard.characterType+'/'+wizard.characterType+'3.png',
-    '/characters/'+wizard.characterType+'/'+wizard.characterType+'4.png']
+  const [dialogueText, setDialogueText] = useState(dialogue[0]);
+  const [textDisplay, setTextDisplay] = useState(true);
+  const [planPage, setPlanPage] = useState(false);
 
-    const [imageURI, setImageURI] = useState(characterImages[0])
+  const characterImages = [
+    "/characters/" +
+      wizard.characterType +
+      "/" +
+      wizard.characterType +
+      "1.png",
+    "/characters/" +
+      wizard.characterType +
+      "/" +
+      wizard.characterType +
+      "2.png",
+    "/characters/" +
+      wizard.characterType +
+      "/" +
+      wizard.characterType +
+      "3.png",
+    "/characters/" +
+      wizard.characterType +
+      "/" +
+      wizard.characterType +
+      "4.png",
+  ];
+
+  const [imageURI, setImageURI] = useState(characterImages[0]);
 
   const nextDialogue = () => {
-    var index  = dialogue.indexOf(dialogueText)
-    index += 1
-    if(index === dialogue.length){
-      setTextDisplay(false)
-      setImageURI(characterImages[0])
+    var index = dialogue.indexOf(dialogueText);
+    index += 1;
+    if (index === dialogue.length) {
+      setTextDisplay(false);
+      setImageURI(characterImages[0]);
     }
-    console.log(index, dialogue[index])
-    setDialogueText(dialogue[index])
-    if(index%2 !== 0){
-      var imgIndex = characterImages.indexOf(imageURI)
-      if(imgIndex+1 == characterImages.length) imgIndex = 0
-      setImageURI(characterImages[imgIndex+1])
+    console.log(index, dialogue[index]);
+    setDialogueText(dialogue[index]);
+    if (index % 2 !== 0) {
+      var imgIndex = characterImages.indexOf(imageURI);
+      if (imgIndex + 1 == characterImages.length) imgIndex = 0;
+      setImageURI(characterImages[imgIndex + 1]);
     }
-
-
-    
   };
 
   const readAgain = () => {
-    setTextDisplay(true)
-    setDialogueText(dialogue[0])
-    setImageURI(characterImages[1])
-  }
+    setTextDisplay(true);
+    setDialogueText(dialogue[0]);
+    setImageURI(characterImages[1]);
+  };
 
-  const displayPlanPage = () =>{
-    console.log('bs');
-    setPlanPage(true)
-  }
+  const displayPlanPage = () => {
+    console.log("bs");
+    setPlanPage(true);
+  };
 
   return (
     <Container>
       <>
-    { !planPage && 
-      <div>
+        {!planPage && (
+          <div>
+            <ImageOverlay
+              leftImage={"/treeandbush/bush.png"}
+              rightImage={"/treeandbush/tree3.png"}
+            />
 
-        <ImageOverlay leftImage={'/treeandbush/bush.png'} rightImage={'/treeandbush/tree3.png'} />
+            <div className={styles.wizard}>
+              <img src={imageURI} alt=""></img>
+            </div>
 
-        <div className={styles.wizard}>
-          <img src={imageURI}></img>
-        </div>
+            {textDisplay && (
+              <div className={styles.textbubble}>
+                <h2 className={styles.dialogue}>{dialogueText}</h2>
+                <button onClick={nextDialogue}>Next</button>
+              </div>
+            )}
 
-        { textDisplay &&
-          <div className={styles.textbubble}>
-            <h2 className={styles.dialogue}>{dialogueText}</h2>
-            <button onClick={nextDialogue}>Next</button>
+            {!textDisplay && (
+              <div className={styles.questions}>
+                <Button onClick={readAgain}>på nytt</Button>
+                <Button onClick={displayPlanPage}>gi meg en plan!</Button>
+                <Button onClick={() => router.push("/" + skillId)}>
+                  Ferdig
+                </Button>
+              </div>
+            )}
           </div>
-        }
-        
-        {!textDisplay && 
-          <div className={styles.questions}>
-            <Button onClick={readAgain} >på nytt</Button>
-            <Button onClick={displayPlanPage}>gi meg en plan!</Button>
-            <Button onClick={() => router.push("/" + skillId)}>Ferdig</Button>
-          </div>
-        }
-      </div>
-    }
+        )}
 
-      { planPage &&
-        <div className={styles.plan}>
-           <ImageOverlay leftImage={'/treeandbush/bush.png'} rightImage={'/treeandbush/tree3.png'} />
-          <div className={styles.graphics}>
-            <img src="/pen-n-paipa.png"></img>
-            <h1 className={styles.name}>some name</h1>
-            <ul className={styles.list}>
-              <li>greie 1</li>
-              <li>greie 2</li>
-              <li>greie 3</li>
-              <li> greie 4</li>
-            </ul>
+        {planPage && (
+          <div className={styles.plan}>
+            <ImageOverlay
+              leftImage={"/treeandbush/bush.png"}
+              rightImage={"/treeandbush/tree3.png"}
+            />
+            <div className={styles.graphics}>
+              <img src="/pen-n-paipa.png" alt=""></img>
+              <h1 className={styles.name}>some name</h1>
+              <ul className={styles.list}>
+                <li>greie 1</li>
+                <li>greie 2</li>
+                <li>greie 3</li>
+                <li> greie 4</li>
+              </ul>
+            </div>
+            <div className={styles.questions}>
+              <Button onClick={() => router.push("/" + skillId)}>
+                Yes tanx
+              </Button>
+            </div>
           </div>
-          <div className={styles.questions}>
-            <Button onClick={() => router.push("/" + skillId)}>Yes tanx</Button>
-          </div>
-        </div>
-      }
+        )}
       </>
     </Container>
   );
