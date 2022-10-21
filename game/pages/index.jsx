@@ -19,13 +19,15 @@ const Welcome = () => {
           textAlign: "center",
         }}
       >
-        <h1> Heisann hoppsann</h1>
+        <h1>Velkommen til Knowit Adventure </h1>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s
         </p>
-        <Button onClick={() => router.push("/onboarding/name")}>Start</Button>
+        <Button onClick={() => router.push("/onboarding/name")}>
+          Start eventyret
+        </Button>
       </div>
     </Container>
   );
