@@ -8,10 +8,15 @@ import { Container } from "../../components/Container/Container";
 import { usePersistedState } from "../../hooks/usePersistedState";
 
 const SkillDialogue = ({ dialogue, skillId, wizard }) => {
-  if (!dialogue) {
-    return <Container>Missing dialogue...</Container>;
-  }
   const router = useRouter();
+  if (!dialogue) {
+    return (
+      <Container>
+        <p>Missing dialogue...</p>
+        <Button onClick={() => router.push("/" + skillId)}>Gå tilbake</Button>
+      </Container>
+    );
+  }
   const [dialogueText, setDialogueText] = useState(dialogue[0]);
   const [textDisplay, setTextDisplay] = useState(true);
   const [planPage, setPlanPage] = useState(false);

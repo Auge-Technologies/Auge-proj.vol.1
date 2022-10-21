@@ -1,8 +1,6 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useContext, useEffect, useRef } from "react";
-import { CharacterContext } from "../../context/characterPositionContext";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { CharacterContext } from "../../context/CharacterPositionContext";
 import style from "./Character.module.scss";
 
 export const Character = ({ route }) => {
