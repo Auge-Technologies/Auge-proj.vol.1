@@ -10,7 +10,6 @@ export const Map = ({
   route,
   skillId,
 }) => {
-  console.log(outputConnectionCount);
   return (
     <div className={styles.mapWrapper}>
       <Character route={route} />
@@ -35,16 +34,16 @@ export const Map = ({
       </div>
       <div className={cn(styles.map, styles.right)}>
         <Image
-          src={`/mapTiles/right-${inputConnectionCount}-foreground.png  `}
-          alt={`right-${inputConnectionCount}-foreground`}
+          src={`/mapTiles/right-${outputConnectionCount}-foreground.png  `}
+          alt={`right-${outputConnectionCount}-foreground`}
           layout="fill"
           objectFit="cover"
           objectPosition={"left"}
           priority
         />
         <Image
-          src={`/mapTiles/right-${inputConnectionCount}-background.png  `}
-          alt={`right-${inputConnectionCount}-background`}
+          src={`/mapTiles/right-${outputConnectionCount}-background.png  `}
+          alt={`right-${outputConnectionCount}-background`}
           layout="fill"
           objectFit="cover"
           objectPosition={"left"}
