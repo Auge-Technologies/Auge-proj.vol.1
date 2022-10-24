@@ -23,6 +23,7 @@ export const Map = ({
             objectFit="cover"
             objectPosition={"right"}
             priority
+            crossOrigin="anonymous"
           />{" "}
           <Image
             src={`/mapTiles/left-${inputConnectionCount}-background.png`}
@@ -31,6 +32,7 @@ export const Map = ({
             objectFit="cover"
             objectPosition={"right"}
             priority
+            crossOrigin="anonymous"
           />
         </div>
         <div className={cn(styles.map, styles.right)}>
@@ -41,6 +43,7 @@ export const Map = ({
             objectFit="cover"
             objectPosition={"left"}
             priority
+            crossOrigin="anonymous"
           />
           <Image
             src={`/mapTiles/right-${outputConnectionCount}-background.png  `}
@@ -49,6 +52,7 @@ export const Map = ({
             objectFit="cover"
             objectPosition={"left"}
             priority
+            crossOrigin="anonymous"
           />
         </div>
       </div>
