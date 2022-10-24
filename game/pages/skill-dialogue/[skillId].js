@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import client from "../../lib/client";
 import { useRouter } from "next/router";
 import styles from "./skilldialogue.module.scss";
@@ -44,22 +44,28 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
       wizard.characterType +
       "4.png",
   ];
+  const [imageURI, setImageURI] = useState(characterImages[1]);
 
-  const [imageURI, setImageURI] = useState(characterImages[0]);
+  const handleKeypress = (e) => {
+    console.log(e.key);
+    console.log("aaa");
+    if (e.key === " ") {
+      nextDialogue;
+    }
+  };
 
   const nextDialogue = () => {
     var index = dialogue.indexOf(dialogueText);
     index += 1;
-    if (index === dialogue.length) {
-      setTextDisplay(false);
-      setImageURI(characterImages[0]);
-    }
-    console.log(index, dialogue[index]);
     setDialogueText(dialogue[index]);
-    if (index % 2 !== 0) {
+    if (index % 2 === 0) {
       var imgIndex = characterImages.indexOf(imageURI);
       if (imgIndex + 1 == characterImages.length) imgIndex = 0;
       setImageURI(characterImages[imgIndex + 1]);
+    }
+    if (index === dialogue.length) {
+      setTextDisplay(false);
+      setImageURI(characterImages[0]);
     }
   };
 
@@ -78,22 +84,22 @@ const SkillDialogue = ({ dialogue, skillId, wizard }) => {
     <Container>
       <>
         {!planPage && (
-          <div>
+          <div onKeyPress={handleKeypress}>
             <ImageOverlay
               leftImage={"/treeandbush/bush.png"}
               rightImage={"/treeandbush/tree3.png"}
             />
 
-            <div className={styles.wizard}>
-              <img src={imageURI} alt=""></img>
-            </div>
+            <div className={styles.wizAndText}>
+              {textDisplay && (
+                <div className={styles.textbubble}>
+                  <h2 className={styles.dialogue}>{dialogueText}</h2>
+                  <Button onClick={nextDialogue}>Next</Button>
+                </div>
+              )}
 
-            {textDisplay && (
-              <div className={styles.textbubble}>
-                <h2 className={styles.dialogue}>{dialogueText}</h2>
-                <button onClick={nextDialogue}>Next</button>
-              </div>
-            )}
+              <img className={styles.wizard} src={imageURI} alt=""></img>
+            </div>
 
             {!textDisplay && (
               <div className={styles.questions}>

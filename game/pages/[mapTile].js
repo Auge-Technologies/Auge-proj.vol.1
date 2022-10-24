@@ -85,12 +85,12 @@ const MapScreen = ({
           <MapMarker label={name} top={height * 0.3} left />
         ))}
       </ul>
-      <ul style={{ position: "absolute", right: 0 }}>
+      <ul style={{ position: "absolute", right: 40 }}>
         {outputConnections.map(({ name, _id }, index) => {
           let pos = {
             1: { 0: 0.35 },
-            2: { 0: 0.2, 1: 0.6 },
-            3: { 0: 0.1, 1: 0.4, 2: 0.78 },
+            2: { 0: 0.1, 1: 0.73 },
+            3: { 0: 0.04, 1: 0.45, 2: 0.78 },
             4: { 0: 0.1, 1: 0.4, 2: 0.6, 3: 0.8 },
           };
           return (
