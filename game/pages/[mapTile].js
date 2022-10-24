@@ -31,7 +31,6 @@ const MapScreen = ({
       (_, index) => index * delta
     );
     const distances = routePositions.map((pos) => Math.abs(pos - y));
-    console.log(y, routePositions, distances);
     const index = distances.indexOf(Math.min(...distances));
     return index;
   };
@@ -58,7 +57,6 @@ const MapScreen = ({
           });
         break;
       case "dialogue":
-        console.log("dialogue");
         break;
       default:
         return;
