@@ -17,31 +17,27 @@ export const Map = ({
         <p className={styles.name}>{name}</p>
         <div className={cn(styles.map, styles.left)}>
           <Image
-            src={`/mapTiles/left${inputConnectionCount}foreground.png`}
+            src={`/mapTiles/left-${inputConnectionCount}-foreground.png`}
             alt={`left-${inputConnectionCount}-foreground`}
             layout="fill"
             objectFit="cover"
             objectPosition={"right"}
-            priority="true"
-            as
           />{" "}
           <Image
-            src={`/mapTiles/left${inputConnectionCount}background.png`}
+            src={`/mapTiles/left-${inputConnectionCount}-background.png`}
             alt={`left-${inputConnectionCount}-background`}
             layout="fill"
             objectFit="cover"
             objectPosition={"right"}
-            priority="true"
           />
         </div>
         <div className={cn(styles.map, styles.right)}>
           <Image
-            src={`/mapTiles/right${outputConnectionCount}foreground.png  `}
+            src={`/mapTiles/right-${outputConnectionCount}-foreground.png  `}
             alt={`right-${outputConnectionCount}-foreground`}
             layout="fill"
             objectFit="cover"
             objectPosition={"left"}
-            priority="true"
           />
           <Image
             src={`/mapTiles/right${outputConnectionCount}background.png  `}
@@ -49,7 +45,6 @@ export const Map = ({
             layout="fill"
             objectFit="cover"
             objectPosition={"left"}
-            priority="true"
           />
         </div>
       </div>
