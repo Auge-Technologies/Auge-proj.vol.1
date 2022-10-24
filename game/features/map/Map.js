@@ -34,7 +34,7 @@ export const Map = ({
       </div>
       <div className={cn(styles.map, styles.right)}>
         <Image
-          src={`/mapTiles/right-${outputConnectionCount}-foreground.png  `}
+          src={`/mapTiles/right-${inputConnectionCount}-foreground.png  `}
           alt={`right-${outputConnectionCount}-foreground`}
           layout="fill"
           objectFit="cover"
@@ -42,7 +42,7 @@ export const Map = ({
           priority
         />
         <Image
-          src={`/mapTiles/right-${outputConnectionCount}-background.png  `}
+          src={`/mapTiles/right-${inputConnectionCount}-background.png  `}
           alt={`right-${outputConnectionCount}-background`}
           layout="fill"
           objectFit="cover"
