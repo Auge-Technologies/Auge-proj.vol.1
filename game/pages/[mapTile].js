@@ -8,6 +8,7 @@ import useWindowDimensions from "../hooks/useWindowDimensions";
 import { Wizard } from "../features/map/Wizard";
 import { KnownSkillsContext } from "../context/KnownSkillsContext";
 import { OpenDialogueButton } from "../features/map/OpenDialogue";
+import { KnownSkillMessage } from "../features/map/KnownSkillMessge";
 
 const MapScreen = ({
   name,
@@ -76,6 +77,11 @@ const MapScreen = ({
         <>
           <Wizard type={wizard.characterType} />
           <OpenDialogueButton skillId={skillId} />
+        </>
+      )}
+      {knownSkills.includes(skillId) && (
+        <>
+          <KnownSkillMessage />
         </>
       )}
       <ul style={{ position: "absolute", left: 0 }}>

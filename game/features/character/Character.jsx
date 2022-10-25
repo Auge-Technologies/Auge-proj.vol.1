@@ -30,7 +30,7 @@ export const Character = ({ route }) => {
     }
     handleResize();
 
-    const speed = 8;
+    const speed = 15;
     let height, width;
 
     const startDirection =
