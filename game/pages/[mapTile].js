@@ -80,7 +80,7 @@ const MapScreen = ({
       )}
       <ul style={{ position: "absolute", left: 0 }}>
         {inputConnections?.map(({ name, _id }) => (
-          <MapMarker label={name} top={height * 0.3} left />
+          <MapMarker route={route} label={name} top={height * 0.3} left />
         ))}
       </ul>
       <ul style={{ position: "absolute", right: 40 }}>
@@ -93,6 +93,7 @@ const MapScreen = ({
           };
           return (
             <MapMarker
+              route={route}
               label={name}
               top={pos[outputConnections.length][index] * height}
             />

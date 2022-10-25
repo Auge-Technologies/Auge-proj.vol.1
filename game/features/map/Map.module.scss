@@ -47,6 +47,7 @@
 }
 
 .mapMarker {
+  cursor: pointer;
   background-color: white;
   padding: 0.5rem 1rem;
   font-size: 2rem;
@@ -69,6 +70,13 @@
     right: auto;
     left: 2rem;
   }
+}
+.mapMarker:hover {
+  box-shadow: 5px 5px;
+  transform: translate(5px, 5px);
+}
+.mapMarker:active {
+  color: #434343;
 }
 
 .openDialogueButton {

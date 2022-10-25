@@ -17,6 +17,7 @@ export const Character = ({ route }) => {
   };
 
   const outOfBounds = (direction, y) => {
+    console.log(direction);
     route(direction, y);
   };
 

@@ -18,7 +18,6 @@ const YoureaWizard = () => {
         </p>
         <div>
           <Image src="/onboarding/wizard.png" width={400} height={400} />
-          <Image src="/onboarding/Tutoria.png" width={718} height={355} />
         </div>
         <br />
         <Button
